@@ -99,7 +99,7 @@ class StyleBertVITS2TTSEngine(TTSEngine):
             # cudnn_conv_algo_search を DEFAULT にすると推論速度が大幅に向上する
             # ref: https://medium.com/neuml/debug-onnx-gpu-performance-c9290fe07459
             self.onnx_providers.append(("CUDAExecutionProvider", {
-                "arena_extend_strategy": "kSameAsRequested",
+                "arena_extend_strategy": "kNextPowerOfTwo",  # GPU 메모리 활용도 최대화
                 "cudnn_conv_algo_search": "DEFAULT",
             }))  # fmt: skip
             # DirectML が利用可能なら、フォールバックとして DmlExecutionProvider も指定する
